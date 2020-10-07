@@ -1,3 +1,5 @@
+Change in the program to use multithreads made by Nicolas DUPUIS
+
 # Overview
 
 In this project, you will implement a multithreaded version of the
