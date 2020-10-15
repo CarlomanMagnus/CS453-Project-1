@@ -1,0 +1,49 @@
+## Grade: 91/100
+
+- [30 pts] Make concurrent (ABET outcome 1) - 30
+  - [10 pts] You got a speedup of at least 2 with 4 or more cores 
+  - [10 pts] mytests.c accepts a number of threads as a command line argument
+  - [10 pts] Correctly creates new threads
+
+- [30 pts] Implementation analysis (speedup.pdf ABET outcome 6) - 30
+  - Score will reflect the quality of the analysis.
+
+- [10 pts] Code quality for **lab.c**
+  - [4 pts] Code is formatted correctly and follows a consistent style
+  - [2 pts] Code is commented when necessary
+  - [4 pts] There is more than just the main function in **mytests.c**
+
+- [20 pts] Compiler warnings **ALL files** - 11: 3 warnings
+  - Each compiler warning will result in a 3 point deduction.
+  - You are not allowed to suppress warnings
+  - You must build with the flags ```-Wall -Wextra -Wpointer-arith -Wstrict-prototypes -std=gnu89```
+
+***********
+gcc -Wall -Wextra -Wpointer-arith -Wstrict-prototypes -pthread -std=gnu89 -fPIC -MMD -MP    -c -o lab.o lab.c
+lab.c: In function ‘parallel_mergesort’:
+lab.c:84:38: warning: passing argument 3 of ‘pthread_create’ from incompatible pointer type [-Wincompatible-pointer-types]
+         pthread_create(&thread1,NULL,parallel_mergesort,data_1);
+                                      ^~~~~~~~~~~~~~~~~~
+In file included from lab.c:10:
+/usr/include/pthread.h:236:15: note: expected ‘void * (*)(void *)’ but argument is of type ‘void * (*)(thread_data_input *)’ {aka ‘void * (*)(struct <anonymous> *)’}
+       void *(*__start_routine) (void *),
+       ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+lab.c:97:38: warning: passing argument 3 of ‘pthread_create’ from incompatible pointer type [-Wincompatible-pointer-types]
+         pthread_create(&thread2,NULL,parallel_mergesort,data_2);
+                                      ^~~~~~~~~~~~~~~~~~
+In file included from lab.c:10:
+/usr/include/pthread.h:236:15: note: expected ‘void * (*)(void *)’ but argument is of type ‘void * (*)(thread_data_input *)’ {aka ‘void * (*)(struct <anonymous> *)’}
+       void *(*__start_routine) (void *),
+       ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+lab.c:112:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+
+***********
+
+- [10 pts] Valgrind reports no memory leaks or read/write errors - 10
+  - As reported by **runval.sh**
+  - This is a **PASS/FAIL** score. 1 read/write error or leaking 1
+    byte will result in a zero for this section. There is no partial
+    credit for this section.
+
